@@ -1,0 +1,47 @@
+from account import Create_Account
+from account import Account
+
+if __name__ == "__main__" :
+    try :
+        flag = True
+
+        while flag :
+            print("1 means New User\n2 means Existing User")
+
+            choice = int(input("Enter either 1 and 2 : "))
+
+            if choice == 1 :
+                account_number = int(input("Enter the Account Number : "))
+                name = input("Enter the Name : ")
+                balance = int(input("Enter the Account Opening Balance : "))
+                create_account = Create_Account(account_number,name,balance)
+                create_account.get_accountDetails()
+
+            elif choice == 2 :
+                print("1 means Withdrawal\n2 means Deposit\n3 means Check Balance\n4 means Exit")
+                value = int(input("Enter Either 1,2,3 or 4 : "))
+                account = Account(create_account)
+                if value == 1 :
+                    amount_withdrawal = int(input("How much Amount you want to Withdraw : "))
+                    account.withdrawal(amount_withdrawal)
+                elif value == 2 :
+                    amount_deposit = int(input("How much Amount you want to Deposit : "))
+                    account.deposit(amount_deposit)
+                elif value == 3 :
+                    account.check_balance()
+                elif value == 4 :
+                    flag = False
+                else:
+                    raise "Please Provide correct input either 1,2,3 or 4"
+                
+            else :
+                raise print("Please Provide correct input either 1 or 2")
+            
+    except Exception as e:
+        print(e)
+
+                
+            
+
+
+        

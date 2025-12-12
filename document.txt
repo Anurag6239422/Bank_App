@@ -1,0 +1,334 @@
+✅ Bank Account App – Step-by-Step Project Plan
+PHASE 1 — Core Foundation (Beginner Level)
+Step 1: Create Project Structure
+
+Tasks:
+Create a folder: bank_app/
+Inside create files:
+main.py
+account.py
+database.txt (temporary file storage)
+utils.py
+Output: Project skeleton ready.
+
+
+Step 2: Create the Account Class (OOP Basics)
+Inside account.py create a class:
+
+Tasks:
+Create class Account
+Attributes:
+account_number
+name
+balance
+Create methods:
+deposit(amount)
+withdraw(amount)
+check_balance()
+
+Output: You can create an account object and perform basic operations.
+
+Hint:
+Use constructor __init__ and simple print statements.
+
+Step 3: Add Input/Output in main.py
+
+Tasks:
+Allow user to:
+Create new account
+Deposit
+Withdraw
+Check balance
+Use:
+choice = input("Enter your choice: ")
+
+Output: A console-based working menu.
+Hint:
+Use while True: to run the app continuously.
+
+*********************************************************************************************************************************************************
+
+PHASE 2 — File Handling (Intermediate Level)
+
+Now you will store data permanently.
+
+Step 4: Save Accounts to a File (File Handling)
+
+In utils.py:
+
+Tasks:
+
+Create functions: save_account(account_obj) load_accounts()
+
+Format example in database.txt:
+
+1001,John Doe,5000
+1002,Alice,3000
+
+
+Output: Accounts saved/loaded automatically.
+
+Hint: Use open(file, "a") for saving and "r" for reading.
+
+
+******************Step 4 Explaination*********************************************************************************************************************
+
+Create a file:
+
+utils.py
+
+
+Inside it, make 2 functions:
+
+save_account(account_obj) → saves an account to a text file
+
+load_accounts() → reads all accounts from the text file
+
+The file where accounts will be stored:
+
+database.txt
+
+🧠 Why We Need This
+
+Right now, your accounts only exist in memory when your program runs.
+If you close the program → all accounts are gone.
+
+By saving accounts to database.txt, they are permanent.
+
+📄 Format of database.txt (simple CSV format)
+1001,John Doe,5000
+1002,Alice,3000
+
+
+This means:
+
+Account number
+
+Name
+
+Balance
+
+All separated by commas.
+
+🧩 Step-by-Step Explanation
+✅ 1. Create utils.py file
+
+Inside utils.py, create the two required functions.
+
+✔️ FUNCTION 1 → save_account(account_obj)
+What it does
+
+Opens database.txt
+
+Adds a new line with the account data
+
+Example stored line:
+
+1001,John Doe,5000
+
+Code:
+def save_account(account_obj, filename="database.txt"):
+    with open(filename, "a") as file:  # append mode
+        line = f"{account_obj.account_number},{account_obj.name},{account_obj.balance}\n"
+        file.write(line)
+        print("Account saved successfully!")
+
+✔️ FUNCTION 2 → load_accounts()
+What it does
+
+Opens the file
+
+Reads each line
+
+Splits the values
+
+Creates Create_Account objects for each line
+
+Code:
+from account import Create_Account
+
+def load_accounts(filename="database.txt"):
+    accounts = []
+    try:
+        with open(filename, "r") as file:
+            for line in file:
+                acc_no, name, balance = line.strip().split(",")
+                account_obj = Create_Account(int(acc_no), name, int(balance))
+                accounts.append(account_obj)
+    except FileNotFoundError:
+        print("No accounts found. File does not exist yet.")
+    
+    return accounts
+
+🧪 Example of How You Use These Functions
+Saving an account:
+from utils import save_account
+
+save_account(create_account)
+
+Loading accounts at start:
+from utils import load_accounts
+
+all_accounts = load_accounts()
+
+
+This gives you a list of Create_Account objects.
+
+🧠 Extra Tip (Very Important!)
+
+When a new user creates an account (choice == 1), you MUST save the account:
+
+create_account = Create_Account(account_number, name, balance)
+save_account(create_account)
+
+✔️ Summary Table
+Task	Function	Mode	Purpose
+Save account	save_account()	"a" append mode	Adds new account to file
+Load accounts	load_accounts()	"r" read mode	Loads all accounts into memory
+
+***********************************************************************************************************************************************************************
+
+Step 5: Auto-generate Account Numbers
+
+In utils.py:
+
+Tasks:
+
+Create function get_next_account_number()
+
+Read last line of file
+
+Add +1 for next account
+
+Output: Every new account gets unique number.
+
+Step 6: Implement Login Using Account Number
+
+Tasks:
+
+Ask user to enter account number
+
+Load accounts
+
+Return matching account object
+
+Output: You can login using account number and perform operations.
+
+Hint: Use loops and string split to match account number.
+
+PHASE 3 — OOP Improvements (Advanced Basics)
+Step 7: Add Transaction History
+
+Create a new file: transactions.txt
+
+Tasks:
+
+Record:
+
+deposit
+
+withdrawal
+
+balance check
+
+Format:
+
+1001,deposit,1000,2025-02-10
+
+
+Output: Every transaction is logged.
+
+Step 8: Add Multiple Account Types (Inheritance)
+
+Tasks:
+Create classes:
+
+SavingsAccount(Account)
+
+CurrentAccount(Account)
+
+Differences:
+
+Savings: minimum balance check
+
+Current: allows overdraft
+
+Output: User can choose account type.
+
+Step 9: Add Error Handling
+
+Tasks:
+
+Validation:
+
+Negative deposits
+
+Withdraw greater than balance
+
+Wrong choices
+
+Invalid account number
+
+Use try/except.
+
+Output: Stable application with proper error messages.
+
+PHASE 4 — Expansion for Future Features (Optional But Recommended)
+Step 10: Add Recursion Practice (Optional)
+
+Use recursion for:
+
+Searching an account in the list
+
+Re-running menu on invalid input
+
+Step 11: Add Password for Accounts
+
+Tasks:
+
+Ask for password during account creation
+
+Hash password and store
+
+Verify on login
+
+Step 12: Convert File Handling → JSON/CSV/Database later
+
+Start with file handling, later upgrade to:
+
+JSON
+
+SQLite
+
+MySQL
+
+Step 13: Add Admin Panel
+
+Admin should view:
+
+All accounts
+
+Total bank balance
+
+User logs
+
+Step 14: Add UI later (Future)
+
+User Interface:
+
+Tkinter GUI
+
+Flask web app
+
+Django full system
+
+🎯 FINAL OUTPUT OF YOUR COMPLETE PROJECT
+
+By following the steps, you'll have a complete:
+
+✔ Console based banking system
+✔ OOP-driven app
+✔ Persistent storage
+✔ Transaction logging
+✔ Multiple account types
+✔ Secure login system
