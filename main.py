@@ -1,5 +1,6 @@
 from account import Create_Account
 from account import Account
+from utils import save_account, load_accounts
 
 if __name__ == "__main__" :
     try :
@@ -15,11 +16,12 @@ if __name__ == "__main__" :
                 name = input("Enter the Name : ")
                 balance = int(input("Enter the Account Opening Balance : "))
                 create_account = Create_Account(account_number,name,balance)
+                save_account(create_account)
                 create_account.get_accountDetails()
 
             elif choice == 2 :
-                print("1 means Withdrawal\n2 means Deposit\n3 means Check Balance\n4 means Exit")
-                value = int(input("Enter Either 1,2,3 or 4 : "))
+                print("1 means Withdrawal\n2 means Deposit\n3 means Check Balance\n4 means All Account Details\n5 means Exit")
+                value = int(input("Enter Either 1,2,3,4 or 5: "))
                 account = Account(create_account)
                 if value == 1 :
                     amount_withdrawal = int(input("How much Amount you want to Withdraw : "))
@@ -30,6 +32,9 @@ if __name__ == "__main__" :
                 elif value == 3 :
                     account.check_balance()
                 elif value == 4 :
+                    all_account = load_accounts()
+                    print(all_account)
+                elif value == 5 :
                     flag = False
                 else:
                     raise "Please Provide correct input either 1,2,3 or 4"
