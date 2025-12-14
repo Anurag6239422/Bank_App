@@ -7,27 +7,16 @@ def save_account(create_account_obj,
         file.write(line)
 
 def load_accounts(file_name=r"C:\Users\anura_9posmze\OneDrive\Desktop\bank_app\Bank_App\database.txt"):
-    acc = []
     try:
         with open(file_name, "r") as file:
+            accounts = []
             for line in file:
                 line = line.strip()
-                if not line:
-                    continue  # skip empty lines
-
-                parts = line.split(",")
-
-                if len(parts) != 3:
-                    print("Skipping bad line:", line)
-                    continue
-
-                acc_no, name, balance = parts
-                try:
-                    acc.append(Create_Account(int(acc_no), name, int(balance)))
-                except ValueError:
-                    print("Skipping line with invalid numbers:", line)
-
+                if line:
+                    account_number, name, balance = line.split(',')
+                    acc = Create_Account(int(account_number), name, int(balance))
+                    accounts.append(acc)
+            return accounts
     except FileNotFoundError:
-        print("No account found. File does not exist")
-
-    return acc
+        print("Unable to read data from database.txt")
+        return []

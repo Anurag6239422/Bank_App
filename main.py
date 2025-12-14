@@ -20,6 +20,16 @@ if __name__ == "__main__" :
                 create_account.get_accountDetails()
 
             elif choice == 2 :
+                account_number = int(input("Enter the Account Number : "))
+                accounts = load_accounts()
+                create_account = None
+                for acc in accounts:
+                    if acc.account_number == account_number:
+                        create_account = acc
+                        break
+                if create_account is None:
+                    print("Account not found!")
+                    continue
                 print("1 means Withdrawal\n2 means Deposit\n3 means Check Balance\n4 means All Account Details\n5 means Exit")
                 value = int(input("Enter Either 1,2,3,4 or 5: "))
                 account = Account(create_account)
@@ -32,15 +42,17 @@ if __name__ == "__main__" :
                 elif value == 3 :
                     account.check_balance()
                 elif value == 4 :
-                    all_account = load_accounts()
-                    print(all_account)
+                    acc = load_accounts()
+                    for i in acc:
+                        i.get_accountDetails()
+                        print()
                 elif value == 5 :
                     flag = False
                 else:
-                    raise "Please Provide correct input either 1,2,3 or 4"
+                    raise ValueError("Please Provide correct input either 1,2,3 or 4")
                 
             else :
-                raise print("Please Provide correct input either 1 or 2")
+                raise ValueError("Please Provide correct input either 1 or 2")
             
     except Exception as e:
         print(e)
