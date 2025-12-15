@@ -20,9 +20,7 @@ class Create_Account:
         return ''.join(digits)
 
     def get_accountDetails(self):
-        print(f"The Account Number is : {self.account_number}")
-        print(f"The Name of Account Holder is : {self.name}")
-        print(f"The Opening Account Balance is : {self.balance}")
+        return self.name, self.balance
 
 
 class Account:
@@ -31,7 +29,7 @@ class Account:
 
     def deposit(self, amount):
         self.account.balance += amount
-        print(f"Deposited Successfully")
+        return self.account.balance
 
     def withdrawal(self, amount):
         if self.account.balance <= 0:

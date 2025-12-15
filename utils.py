@@ -19,16 +19,13 @@ def load_accounts(file_name=r"C:\Users\anura_9posmze\OneDrive\Desktop\bank_app\B
                     print(f"Skipping malformed line {lineno}: {line}")
                     continue
                 account_number_s, name, balance_s = parts
-                # account_number may be a numeric string; keep as string to preserve digits
-                if not account_number_s.isdigit():
-                    print(f"Skipping line {lineno} with non-numeric account number: {line}")
-                    continue
                 try:
+                    account_number = int(account_number_s)
                     balance = int(balance_s)
                 except ValueError:
-                    print(f"Skipping line {lineno} with non-numeric balance: {line}")
+                    print(f"Skipping line {lineno} with non-numeric fields: {line}")
                     continue
-                acc = Create_Account(name, balance, account_number=account_number_s)
+                acc = Create_Account(account_number, name, balance)
                 accounts.append(acc)
     except FileNotFoundError:
         print("Unable to read data from database.txt")

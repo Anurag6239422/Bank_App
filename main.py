@@ -38,7 +38,14 @@ if __name__ == "__main__" :
                     account.withdrawal(amount_withdrawal)
                 elif value == 2 :
                     amount_deposit = int(input("How much Amount you want to Deposit : "))
-                    account.deposit(amount_deposit)
+                    accounts = load_accounts()
+                    for acc in accounts:
+                        if acc.account_number == account_number:
+                            name, balance = acc.get_accountDetails()
+                            balance = account.deposit(amount_deposit)
+                            create_account = Create_Account(name, balance, account_number)
+                            save_account(create_account)
+                            print("Amount Deposited Successfully")
                 elif value == 3 :
                     account.check_balance()
                 elif value == 4 :

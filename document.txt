@@ -332,3 +332,27 @@ By following the steps, you'll have a complete:
 ✔ Transaction logging
 ✔ Multiple account types
 ✔ Secure login system
+
+
+*********************************************************************************************************************************************************************************
+
+def update_balance(account_number, new_balance):
+    updated = False
+
+    with open("accounts.txt", "r") as file:
+        lines = file.readlines()
+
+    with open("accounts.txt", "w") as file:
+        for line in lines:
+            acc_no, name, balance = line.strip().split(",")
+
+            if acc_no == account_number:
+                file.write(f"{acc_no},{name},{new_balance}\n")
+                updated = True
+            else:
+                file.write(line)
+
+    if updated:
+        print("Balance updated successfully")
+    else:
+        print("Account not found")
