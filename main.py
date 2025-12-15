@@ -12,15 +12,15 @@ if __name__ == "__main__" :
             choice = int(input("Enter either 1 and 2 : "))
 
             if choice == 1 :
-                account_number = int(input("Enter the Account Number : "))
                 name = input("Enter the Name : ")
                 balance = int(input("Enter the Account Opening Balance : "))
-                create_account = Create_Account(account_number,name,balance)
+                create_account = Create_Account(name, balance)
                 save_account(create_account)
+                print(f"Account created. Your account number is: {create_account.account_number}")
                 create_account.get_accountDetails()
 
             elif choice == 2 :
-                account_number = int(input("Enter the Account Number : "))
+                account_number = input("Enter the Account Number : ")
                 accounts = load_accounts()
                 create_account = None
                 for acc in accounts:
