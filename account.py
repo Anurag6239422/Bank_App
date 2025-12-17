@@ -19,8 +19,13 @@ class Create_Account:
             digits.append(d)
         return ''.join(digits)
 
-    def get_accountDetails(self):
+    def get_certainDetails(self):
         return self.name, self.balance
+    
+    def get_accountDetails(self):
+        print(f"The Account Number : {self.account_number}")
+        print(f"The Name of Account Holder is : {self.name}")
+        print(f"The Balance is : {self.balance}")
 
 
 class Account:

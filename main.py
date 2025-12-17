@@ -1,6 +1,6 @@
 from account import Create_Account
 from account import Account
-from utils import save_account, load_accounts
+from utils import save_account, load_accounts, update_balance
 
 if __name__ == "__main__" :
     try :
@@ -41,10 +41,9 @@ if __name__ == "__main__" :
                     accounts = load_accounts()
                     for acc in accounts:
                         if acc.account_number == account_number:
-                            name, balance = acc.get_accountDetails()
+                            name, balance = acc.get_certainDetails()
                             balance = account.deposit(amount_deposit)
-                            create_account = Create_Account(name, balance, account_number)
-                            save_account(create_account)
+                            update_balance(account_number, balance)
                             print("Amount Deposited Successfully")
                 elif value == 3 :
                     account.check_balance()
