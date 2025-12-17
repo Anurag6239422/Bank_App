@@ -38,10 +38,10 @@ class Account:
 
     def withdrawal(self, amount):
         if self.account.balance <= 0:
-            print("Insufficient Funds!")
+            return -1
         else:
             self.account.balance = self.account.balance - amount
-            print(f"Withdrawal Successfully")
+            return self.account.balance
 
     def check_balance(self):
         print(f"The Balance of Your Account is : {self.account.balance}")

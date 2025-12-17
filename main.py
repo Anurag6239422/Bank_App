@@ -35,7 +35,16 @@ if __name__ == "__main__" :
                 account = Account(create_account)
                 if value == 1 :
                     amount_withdrawal = int(input("How much Amount you want to Withdraw : "))
-                    account.withdrawal(amount_withdrawal)
+                    accounts = load_accounts()
+                    for acc in accounts:
+                        if acc.account_number == account_number:
+                            name, balance = acc.get_certainDetails()
+                            balance = account.withdrawal(amount_withdrawal)
+                            if balance == -1:
+                                print("Insufficient Funds")
+                            else:
+                                update_balance(account_number, balance)
+                                print("Withdrawal Successfully")
                 elif value == 2 :
                     amount_deposit = int(input("How much Amount you want to Deposit : "))
                     accounts = load_accounts()
