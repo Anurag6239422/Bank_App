@@ -1,6 +1,7 @@
 from account import Create_Account
 from account import Account
 from utils import save_account, load_accounts, update_balance
+from bank import log_transaction
 
 if __name__ == "__main__" :
     try :
@@ -45,6 +46,7 @@ if __name__ == "__main__" :
                             else:
                                 update_balance(account_number, balance)
                                 print("Withdrawal Successfully")
+                                log_transaction(account_number,"Withdrawal",amount_withdrawal)
                 elif value == 2 :
                     amount_deposit = int(input("How much Amount you want to Deposit : "))
                     accounts = load_accounts()
@@ -54,8 +56,10 @@ if __name__ == "__main__" :
                             balance = account.deposit(amount_deposit)
                             update_balance(account_number, balance)
                             print("Amount Deposited Successfully")
+                            log_transaction(account_number,"Deposit",amount_deposit)
                 elif value == 3 :
                     account.check_balance()
+                    log_transaction(account_number,"BalanceInquiry",0)
                 elif value == 4 :
                     acc = load_accounts()
                     for i in acc:
