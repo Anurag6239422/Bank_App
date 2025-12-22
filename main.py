@@ -14,8 +14,15 @@ if __name__ == "__main__" :
 
             if choice == 1 :
                 name = input("Enter the Name : ")
-                balance = int(input("Enter the Account Opening Balance : "))
-                create_account = Create_Account(name, balance)
+                account_type =input("Enter the account type, either saving account or current account : ")
+                updated_account_type = account_type.strip().lower()
+                saving_input = ["saving", "saving account", "1"]
+                if updated_account_type in saving_input :
+                    balance = int(input("Enter the Account Opening Balance (Minimum Amount is 500) : "))
+                    create_account = Create_Account(name, balance, "Saving Account")
+                else:
+                    balance = int(input("Enter the Account Opening Balance (Minimum Amount is 1000) : "))
+                    create_account = Create_Account(name, balance, "Current Account")
                 save_account(create_account)
                 print(f"Account created. Your account number is: {create_account.account_number}")
                 create_account.get_accountDetails()
@@ -38,15 +45,23 @@ if __name__ == "__main__" :
                     amount_withdrawal = int(input("How much Amount you want to Withdraw : "))
                     accounts = load_accounts()
                     for acc in accounts:
-                        if acc.account_number == account_number:
+                        if acc.account_number == account_number or acc.account_type == "Saving Account":
                             name, balance = acc.get_certainDetails()
                             balance = account.withdrawal(amount_withdrawal)
-                            if balance == -1:
-                                print("Insufficient Funds")
+                            if balance == -1 or balance < 500:
+                                print("Sorry! Unable to Withdrawal Below Maintance Amount ")
                             else:
                                 update_balance(account_number, balance)
                                 print("Withdrawal Successfully")
                                 log_transaction(account_number,"Withdrawal",amount_withdrawal)
+                        else :
+                            if balance < -2000 :
+                                 print("Sorry! Unable to Withdrawal Below Maintance Amount ")
+                            else:
+                                update_balance(account_number, balance)
+                                print("Withdrawal Successfully")
+                                log_transaction(account_number,"Withdrawal",amount_withdrawal)
+
                 elif value == 2 :
                     amount_deposit = int(input("How much Amount you want to Deposit : "))
                     accounts = load_accounts()

@@ -2,9 +2,10 @@ import random
 
 
 class Create_Account:
-    def __init__(self, name, balance, account_number=None):
+    def __init__(self, name, balance, account_type, account_number=None):
         self.name = name
         self.balance = int(balance)
+        self.account_type = account_type
         if account_number is None:
             self.account_number = self.create_account_number()
         else:
@@ -22,10 +23,17 @@ class Create_Account:
     def get_certainDetails(self):
         return self.name, self.balance
     
+    def AccountType(self):
+        if self.account_type == "Saving Account":
+            return "Saving Account"
+        else:
+            return "Current Account"
+    
     def get_accountDetails(self):
         print(f"The Account Number : {self.account_number}")
         print(f"The Name of Account Holder is : {self.name}")
         print(f"The Balance is : {self.balance}")
+        print(f"The Account type is : {self.AccountType()}")
 
 
 class Account:
