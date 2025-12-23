@@ -14,7 +14,7 @@ if __name__ == "__main__" :
 
             if choice == 1 :
                 name = input("Enter the Name : ")
-                account_type =input("Enter the account type, either saving account or current account : ")
+                account_type = input("Enter the account type, either saving account or current account : ")
                 updated_account_type = account_type.strip().lower()
                 saving_input = ["saving", "saving account", "1"]
                 if updated_account_type in saving_input :
