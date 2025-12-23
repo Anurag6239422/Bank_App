@@ -45,29 +45,32 @@ if __name__ == "__main__" :
                     amount_withdrawal = int(input("How much Amount you want to Withdraw : "))
                     accounts = load_accounts()
                     for acc in accounts:
-                        if acc.account_number == account_number or acc.account_type == "Saving Account":
-                            name, balance = acc.get_certainDetails()
-                            balance = account.withdrawal(amount_withdrawal)
-                            if balance == -1 or balance < 500:
+                        if acc.account_number == account_number:
+                            name, balance, account_type = acc.get_certainDetails()
+                            balance = account.withdrawal(amount_withdrawal, account_type)
+                            if balance == -1 :
                                 print("Sorry! Unable to Withdrawal Below Maintance Amount ")
                             else:
                                 update_balance(account_number, balance)
                                 print("Withdrawal Successfully")
                                 log_transaction(account_number,"Withdrawal",amount_withdrawal)
+                                '''
                         else :
-                            if balance < -2000 :
+                            name, balance, account_type = acc.get_certainDetails()
+                            balance = account.withdrawal(amount_withdrawal, account_type)
+                            if balance == -1:
                                  print("Sorry! Unable to Withdrawal Below Maintance Amount ")
                             else:
                                 update_balance(account_number, balance)
                                 print("Withdrawal Successfully")
-                                log_transaction(account_number,"Withdrawal",amount_withdrawal)
+                                log_transaction(account_number,"Withdrawal",amount_withdrawal)'''
 
                 elif value == 2 :
                     amount_deposit = int(input("How much Amount you want to Deposit : "))
                     accounts = load_accounts()
                     for acc in accounts:
                         if acc.account_number == account_number:
-                            name, balance = acc.get_certainDetails()
+                            name, balance, account_type = acc.get_certainDetails()
                             balance = account.deposit(amount_deposit)
                             update_balance(account_number, balance)
                             print("Amount Deposited Successfully")

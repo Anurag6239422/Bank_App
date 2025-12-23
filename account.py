@@ -21,7 +21,7 @@ class Create_Account:
         return ''.join(digits)
 
     def get_certainDetails(self):
-        return self.name, self.balance
+        return self.name, self.balance, self.account_type
     
     def AccountType(self):
         if self.account_type == "Saving Account":
@@ -44,11 +44,13 @@ class Account:
         self.account.balance += amount
         return self.account.balance
 
-    def withdrawal(self, amount):
-        if self.account.balance <= 0:
+    def withdrawal(self, amount, account_type):
+        self.account.balance = self.account.balance - amount
+        if self.account.balance < 500 and account_type == "Saving Account":
+            return -1
+        elif self.account.balance < -2000 and account_type == "Current Account":
             return -1
         else:
-            self.account.balance = self.account.balance - amount
             return self.account.balance
 
     def check_balance(self):
